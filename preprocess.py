@@ -1,7 +1,7 @@
-from imutils import paths
 import numpy as np
-import pandas as pd
 import cv2
+import os
+
 
 DATASET = 'dataset/'
 TRAIN_IMGS = DATASET + 'cars_train/'
@@ -9,8 +9,12 @@ LABELS = DATASET + 'devkit/train_perfect_preds.txt'
 
 print('Preparing the list of images...')
 # Get the list of paths of images
+img_paths = []
+for img in os.listdir('dataset/cars_train'):
+    img_path = os.path.join('dataset/cars_train', img)
+    img_paths.append(img_path)
+
 img_list = []
-img_paths = list(paths.list_images(TRAIN_IMGS))
 for img in img_paths:
     img = cv2.imread(img)
     img = cv2.resize(img, (256, 256))
